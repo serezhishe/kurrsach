@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"rootDir": "backend",
+		"target": "es5",
+		"module": "commonjs",
+		"lib": ["es2015", "es2016", "es2017", "es2018", "esnext"],
+		"strict": true,
+		"types": [],
+		"importHelpers": false,
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"downlevelIteration": true,
+		"strictNullChecks": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": [
+		"backend/**/*.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

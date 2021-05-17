@@ -1,0 +1,170 @@
+<mat-card>
+	<mat-card-title>Account</mat-card-title>
+	<mat-card-content>
+		<form [formGroup]="form" (ngSubmit)="submit()">
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						placeholder="Login"
+						formControlName="login"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.minlength
+					"
+				>
+					Login should contain at least 5 symbols
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.userAlreadyExist
+					"
+				>
+					User with this login already exist
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.maxlength
+					"
+				>
+					Login can contain not more than 20 symbols
+				</mat-error>
+				<mat-error *ngIf="error" class="error">
+					{{ error }}
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="email"
+						matInput
+						placeholder="Mail"
+						formControlName="mail"
+					/>
+				</mat-form-field>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						placeholder="Name"
+						formControlName="name"
+					/>
+				</mat-form-field>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						placeholder="Second Name"
+						formControlName="second_name"
+					/>
+				</mat-form-field>
+				<mat-error *ngIf="form.controls.second_name.errors">
+					Second name must contain only letters
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						placeholder="Surname"
+						formControlName="surname"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="form.controls.surname.errors"
+				>
+					Surname must contain only letters
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="password"
+						matInput
+						required
+						placeholder="Enter current password"
+						formControlName="old_password"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.old_password.errors &&
+						form.controls.old_password.touched &&
+						form.controls.old_password.errors.wrongPassword
+					"
+				>
+					Password is wrong
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.old_password.errors &&
+						form.controls.old_password.touched &&
+						form.controls.old_password.errors.required
+					"
+				>
+					Currrent password is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="password"
+						matInput
+						placeholder="Enter new password"
+						formControlName="new_password"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.new_password.errors &&
+						form.controls.new_password.touched &&
+						form.controls.new_password.errors.pattern
+					"
+				>
+					Password is too weak (needed: both lowercase and uppercase capital letter, digit, at least 8 symbols)
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="password"
+						matInput
+						placeholder="Confirm password"
+						formControlName="confirm_password"
+					/>
+				</mat-form-field>
+			</p>
+
+			<p
+				*ngIf="form.errors && form.errors.passwordsDoNotMatch"
+				class="error"
+			>
+				Passwords do not match
+			</p>
+
+			<div class="buttons">
+				<button type="submit" mat-raised-button color="primary">
+					Save changes
+				</button>
+			</div>
+		</form>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,59 @@
+.abonents {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 100px 0px;
+	flex-wrap: wrap;
+	gap: 30px;
+
+	.mat-form-field {
+		width: 100%;
+	}
+
+	mat-card-content {
+		min-height: 200px;
+	}
+
+	mat-card-title,
+	mat-card-content {
+		min-width: 400px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.error {
+		color: red;
+	}
+
+	.buttons {
+		* {
+			margin-right: 20px;
+		}
+
+		.label {
+			display: flex;
+			align-items: center;
+			margin-bottom: 0;
+		}
+
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	::ng-deep.mat-list-item-content {
+		justify-content: space-between;
+		height: 40px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+mat-toolbar {
+	display: flex;
+	justify-content: flex-end;
+}

@@ -1,0 +1,227 @@
+<mat-card>
+	<mat-card-title>Register form</mat-card-title>
+	<mat-card-content>
+		<form [formGroup]="form" (ngSubmit)="submit()">
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						required
+						placeholder="Login"
+						formControlName="login"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.minlength
+					"
+				>
+					Login should contain at least 5 symbols
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.userAlreadyExist
+					"
+				>
+					User with this login already exist
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.errors.maxlength
+					"
+				>
+					Login can contain not more than 20 symbols
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.login.errors &&
+						form.controls.login.touched &&
+						form.controls.login.errors.required
+					"
+				>
+					Login is <strong>required</strong>
+				</mat-error>
+				<mat-error *ngIf="error" class="error">
+					{{ error }}
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="email"
+						matInput
+						required
+						placeholder="Mail"
+						formControlName="mail"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.mail.errors &&
+						!form.controls.mail.errors.required
+					"
+				>
+					Please, provide valid email address
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.mail.errors &&
+						form.controls.mail.touched &&
+						form.controls.mail.errors.required
+					"
+				>
+					Email is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						required
+						placeholder="Name"
+						formControlName="name"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.name.errors &&
+						!form.controls.name.errors.required
+					"
+				>
+					Name must contain only letters
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.name.errors &&
+						form.controls.name.touched &&
+						form.controls.name.errors.required
+					"
+				>
+					Name is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						required
+						placeholder="Second Name"
+						formControlName="second_name"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.second_name.errors &&
+						!form.controls.second_name.errors.required
+					"
+				>
+					Second name must contain only letters
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.second_name.errors &&
+						form.controls.second_name.touched &&
+						form.controls.second_name.errors.required
+					"
+				>
+					Second name is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="text"
+						matInput
+						required
+						placeholder="Surname"
+						formControlName="surname"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.surname.errors &&
+						!form.controls.surname.errors.required
+					"
+				>
+					Surname must contain only letters
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.surname.errors &&
+						form.controls.surname.touched &&
+						form.controls.surname.errors.required
+					"
+				>
+					Surname is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="password"
+						matInput
+						required
+						placeholder="Password"
+						formControlName="password"
+					/>
+				</mat-form-field>
+				<mat-error
+					*ngIf="
+						form.controls.password.errors &&
+						form.controls.password.touched &&
+						form.controls.password.errors.pattern
+					"
+				>
+					Password is too weak (needed: both lowercase and uppercase capital letter, digit, at least 8 symbols)
+				</mat-error>
+				<mat-error
+					*ngIf="
+						form.controls.password.errors &&
+						form.controls.password.touched &&
+						form.controls.password.errors.required
+					"
+				>
+					Password is <strong>required</strong>
+				</mat-error>
+			</p>
+
+			<p>
+				<mat-form-field>
+					<input
+						type="password"
+						matInput
+						required
+						placeholder="Confirm password"
+						formControlName="confirm_password"
+					/>
+				</mat-form-field>
+			</p>
+
+			<p
+				*ngIf="form.errors && form.errors.passwordsDoNotMatch"
+				class="error"
+			>
+				Passwords do not match
+			</p>
+
+			<div class="buttons">
+				<p class="label">Already have account?</p>
+				<button type="button" mat-raised-button (click)="navigateToLogin()" color="accent">Log in</button>
+				<button type="submit" mat-raised-button [disabled]="!form.valid" color="primary">
+					Register
+				</button>
+			</div>
+		</form>
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,10 @@
+{
+	"/api": {
+		"target": "http://[::1]:1488",
+		"secure": false
+	},
+	"/images": {
+		"target": "http://[::1]:1488",
+		"secure": false
+	}
+}

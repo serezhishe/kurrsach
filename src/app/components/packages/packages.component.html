@@ -1,0 +1,73 @@
+<mat-toolbar>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="addPackage()"
+		*ngIf="canAddTariffs$ | async"
+	>
+		Add new package
+	</button>
+</mat-toolbar>
+<div class="tariffs">
+	<mat-card *ngFor="let package of packages$ | async">
+		<mat-card-title>{{ package.package_name }}</mat-card-title>
+		<mat-card-content>
+			<img
+				[src]="'./images/' + package.package_name + '.jpeg'"
+				width="400"
+				height="auto"
+				[alt]="package.package_name"
+				style="margin-bottom: 20px;"
+			/>
+			<div [innerHtml]="getSafeHTML(package.description)"></div>
+			<mat-list>
+				<mat-list-item>
+					<span> Month Pay: </span>
+					<span> {{ package.month_pay }} Br </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Smartphone Tariff: </span>
+					<span> {{ package.smartphone_tariff_name }} </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Internet Tariff: </span>
+					<span> {{ package.internet_tariff_name }} </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> TV Tariff: </span>
+					<span> {{ package.tv_tariff_name }} </span>
+				</mat-list-item>
+			</mat-list>
+
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="export(package)"
+				style="margin-bottom: 20px;"
+			>
+				Export package
+			</button>
+			<button
+				mat-raised-button
+				color="primary"
+				style="margin-bottom: 20px"
+				(click)="navigate()"
+			>
+				{{
+					(isAuth$ | async)
+						? "Subscribe to tariff"
+						: "Log In or Sign Up to choose tariff"
+				}}
+			</button>
+			<button
+				mat-raised-button
+				*ngIf="canAddTariffs$ | async"
+				color="primary"
+				(click)="deletePackage(package.package_id)"
+			>
+				Set as inactive
+				<mat-icon>delete_outline</mat-icon>
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>

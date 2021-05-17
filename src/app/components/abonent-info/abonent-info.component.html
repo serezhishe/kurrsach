@@ -1,0 +1,89 @@
+<mat-toolbar>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="addAbonent()"
+	>
+		Add abonent
+	</button>
+</mat-toolbar>
+<div class="abonents">
+	<mat-card *ngFor="let abonent of (abonents$ | async)">
+		<mat-card-title>Abonent Info</mat-card-title>
+		<mat-card-content>
+			<mat-list-item *ngIf="abonent.smartphone_tariff_id">
+				<span> Smartphone Tariff: </span>
+				<a mat-button href="./main"> {{ abonent.smartphone_tariff_name }} </a>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.internet_tariff_id">
+				<span> Internet Tariff: </span>
+				<a mat-button href="./main"> {{ abonent.internet_tariff_name }} </a>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.tv_tariff_id">
+				<span> TV Tariff: </span>
+				<a mat-button href="./main"> {{ abonent.tv_tariff_name }} </a>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.package_id">
+				<span> Package: </span>
+				<a mat-button href="./main"> {{ abonent.package_name }} </a>
+			</mat-list-item>
+
+			<mat-list-item>
+				<span style="margin-right: 10px;"> Balance: </span>
+				<span> {{ abonent.balance }} Br </span>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.left_minute_count !== null">
+				<span style="margin-right: 10px;"> Left minutes count: </span>
+				<span> {{
+					abonent.left_minute_count > -1
+						? abonent.left_minute_count
+						: "∞"
+					}} Minutes </span>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.left_gb_count !== null">
+				<span style="margin-right: 10px;"> Left GB count: </span>
+				<span> {{
+					abonent.left_gb_count > -1
+						? abonent.left_gb_count
+						: "∞"
+					}} GB </span>
+			</mat-list-item>
+
+			<mat-list-item *ngIf="abonent.left_sms_count !== null">
+				<span style="margin-right: 10px;"> Left SMS count: </span>
+				<span> {{
+					abonent.left_sms_count > -1
+						? abonent.left_sms_count
+						: "∞"
+					}} SMS </span>
+			</mat-list-item>
+
+			<mat-list-item>
+				<span style="margin-right: 10px;"> Phone number: </span>
+				<span> {{ abonent.phone_number }} </span>
+			</mat-list-item>
+
+			<div class="buttons">
+				<button type="submit" mat-raised-button color="primary" (click)="onEdit(abonent)">
+					Edit
+				</button>
+				<button type="submit" mat-raised-button color="primary" (click)="export(abonent)">
+					Export
+				</button>
+				<button
+					mat-raised-button
+					color="primary"
+					(click)="deleteAbonent(abonent.abonent_id)"
+				>
+					Delete
+					<mat-icon>delete_outline</mat-icon>
+				</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>

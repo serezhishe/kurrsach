@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+	<h1>Cool Mobile Operator</h1>
+	<div class="buttons">
+		<button
+			mat-flat-button
+			style="margin-right: 30px;"
+			(click)="navigateToMain()"
+		>
+			Tariffs
+		</button>
+		<button
+			*ngIf="isAuth$ | async"
+			mat-flat-button
+			style="margin-right: 30px;"
+			(click)="navigateToAccount()"
+		>
+			Manage account
+		</button>
+		<button
+			*ngIf="isAdmin$ | async"
+			mat-flat-button
+			style="margin-right: 30px;"
+			(click)="navigateToAllUsers()"
+		>
+			View all users data
+		</button>
+	</div>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="navigateToLogin()"
+		*ngIf="isLoginShown$ | async"
+	>
+		Log In
+	</button>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="logout()"
+		*ngIf="isAuth$ | async"
+	>
+		Log Out
+	</button>
+</mat-toolbar>

@@ -1,0 +1,65 @@
+<mat-toolbar>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="addTariff()"
+		*ngIf="canAddTariffs$ | async"
+	>
+		Add new tv tariff
+	</button>
+</mat-toolbar>
+<div class="tariffs">
+	<mat-card *ngFor="let tariff of tariffs$ | async">
+		<mat-card-title>{{ tariff.tv_tariff_name }}</mat-card-title>
+		<mat-card-content>
+			<img
+				[src]="'./images/' + tariff.tv_tariff_name + '.jpeg'"
+				width="400"
+				height="auto"
+				[alt]="tariff.tv_tariff_name"
+				style="margin-bottom: 20px;"
+			/>
+			<div [innerHtml]="getSafeHTML(tariff.description)"></div>
+			<mat-list>
+				<mat-list-item>
+					<span> Month Pay: </span>
+					<span> {{ tariff.month_pay }} Br </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Channel Number: </span>
+					<span> {{ tariff.channel_number }} </span>
+				</mat-list-item>
+			</mat-list>
+
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="export(tariff)"
+				style="margin-bottom: 20px;"
+			>
+				Export tariff
+			</button>
+			<button
+				mat-raised-button
+				style="margin-bottom: 20px"
+				color="primary"
+				(click)="navigate()"
+			>
+				{{
+					(isAuth$ | async)
+						? "Subscribe to tariff"
+						: "Log In or Sign Up to choose tariff"
+				}}
+			</button>
+			<button
+				mat-raised-button
+				*ngIf="canAddTariffs$ | async"
+				color="primary"
+				(click)="deleteTariff(tariff.tv_tariff_id)"
+			>
+				Set as inactive
+				<mat-icon>delete_outline</mat-icon>
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>

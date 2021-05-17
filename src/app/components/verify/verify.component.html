@@ -1,0 +1,42 @@
+<mat-card>
+	<mat-card-title>Enter verify code from email</mat-card-title>
+	<mat-card-content>
+		<mat-form-field>
+			<input
+				type="text"
+				matInput
+				required
+				[value]="code"
+				placeholder="Verify code"
+				(input)="setCode(codeInput.value)"
+				#codeInput
+			/>
+		</mat-form-field>
+		<div class="hints">
+			<mat-hint *ngIf="shouldShowHint" class="new-email-hint">
+				Email with new verify code has been sent to {{ email$ | async }}
+			</mat-hint>
+			<mat-error *ngIf="error" class="error">
+				{{ error }}
+			</mat-error>
+		</div>
+		<div class="buttons">
+			<button
+				mat-raised-button
+				color="accent"
+				(click)="sendAnotherCode()"
+			>
+				Send another email
+			</button>
+			<button
+				type="submit"
+				mat-raised-button
+				color="primary"
+				[disabled]="false"
+				(click)="verify()"
+			>
+				Verify
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>

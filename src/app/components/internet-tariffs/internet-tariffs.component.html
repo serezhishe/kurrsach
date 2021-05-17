@@ -1,0 +1,73 @@
+<mat-toolbar>
+	<button
+		mat-raised-button
+		color="accent"
+		(click)="addTariff()"
+		*ngIf="canAddTariffs$ | async"
+	>
+		Add new internet tariff
+	</button>
+</mat-toolbar>
+<div class="tariffs">
+	<mat-card *ngFor="let tariff of tariffs$ | async">
+		<mat-card-title>{{ tariff.internet_tariff_name }}</mat-card-title>
+		<mat-card-content>
+			<img
+				[src]="'./images/' + tariff.internet_tariff_name + '.jpeg'"
+				width="400"
+				height="auto"
+				[alt]="tariff.internet_tariff_name"
+				style="margin-bottom: 20px;"
+			/>
+			<div [innerHtml]="getSafeHTML(tariff.description)"></div>
+			<mat-list>
+				<mat-list-item>
+					<span> Month Pay: </span>
+					<span> {{ tariff.month_pay }} Br </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Included GB Cost: </span>
+					<span> {{ tariff.included_home_gb_cost }} Br </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Over GB Cost: </span>
+					<span> {{ tariff.over_home_gb_cost }} Br </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Included GB Count: </span>
+					<span> {{ tariff.included_home_gb_count }} GB. </span>
+				</mat-list-item>
+				<mat-list-item>
+					<span> Max Speed: </span>
+					<span> {{ tariff.max_speed }} GB/S </span>
+				</mat-list-item>
+			</mat-list>
+
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="export(tariff)"
+				style="margin-bottom: 20px;"
+			>
+				Export tariff
+			</button>
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="navigate()"
+				style="margin-bottom: 20px;"
+			>
+				{{ (isAuth$ | async) ? 'Subscribe to tariff' : 'Log In or Sign Up to choose tariff' }}
+			</button>
+			<button
+				mat-raised-button
+				*ngIf="canAddTariffs$ | async"
+				color="primary"
+				(click)="deleteTariff(tariff.internet_tariff_id)"
+			>
+				Set as inactive
+				<mat-icon>delete_outline</mat-icon>
+			</button>
+		</mat-card-content>
+	</mat-card>
+</div>

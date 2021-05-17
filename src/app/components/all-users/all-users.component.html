@@ -1,0 +1,163 @@
+<div class="wrapper">
+	<table
+		mat-table
+		[dataSource]="(dataSource | async) || []"
+		matSort
+		class="mat-elevation-z8"
+	>
+		<ng-container matColumnDef="abonent_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>AbonentId</th>
+			<td mat-cell *matCellDef="let element">{{ element.abonent_id }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="balance">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Balance</th>
+			<td mat-cell *matCellDef="let element">{{ element.balance }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="internet_tariff_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Internet TariffId
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.internet_tariff_id || "-" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="left_gb_count">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Left GB</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.left_gb_count > -1 ? element.left_gb_count : "∞" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="left_home_gb_count">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Left Home GB
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{
+					element.left_home_gb_count > -1
+						? element.left_home_gb_count
+						: "∞"
+				}}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="left_minute_count">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Left Minutes
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{
+					element.left_minute_count > -1
+						? element.left_minute_count
+						: "∞"
+				}}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="left_sms_count">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Left SMS</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.left_sms_count > -1 ? element.left_sms_count : "∞" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="login">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
+			<td mat-cell *matCellDef="let element">{{ element.login }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="mail">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Mail</th>
+			<td mat-cell *matCellDef="let element">{{ element.mail }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+			<td mat-cell *matCellDef="let element">
+				{{
+					element.surname +
+						" " +
+						element.name +
+						" " +
+						element.second_name
+				}}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="package_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>PackageId</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.package_id || "-" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="phone_number">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Phone Number
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.phone_number || "-" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="register_date">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Register</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.register_date | date: "shortDate" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="role">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+			<td mat-cell *matCellDef="let element">
+				<mat-select [value]="element.role || 'null'" style="width: 130px;" (valueChange)="setRole($event, element.user_id)">
+					<mat-option value="null">None</mat-option>
+					<mat-option value="redactor">Redactor</mat-option>
+					<mat-option value="admin">Administrator</mat-option>
+				  </mat-select>
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="smartphone_tariff_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				Smartphone TariffId
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.smartphone_tariff_i || "-" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="tv_tariff_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>
+				TV Tariff Id
+			</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.tv_tariff_id || "-" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="user_id">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>UserId</th>
+			<td mat-cell *matCellDef="let element">{{ element.user_id }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="actions">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+			<td mat-cell *matCellDef="let element">
+				<button type="submit" mat-raised-button color="primary" (click)="deleteAbonent(element.abonent_id)" style="margin-right: 20px;">
+					Delete Abonent
+				</button>
+				<button type="submit" mat-raised-button color="primary" (click)="deleteUser(element.user_id)">
+					Delete User
+				</button>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

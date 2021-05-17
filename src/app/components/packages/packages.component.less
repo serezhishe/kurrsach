@@ -1,0 +1,47 @@
+.tariffs {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 100px 0px;
+	flex-wrap: wrap;
+	gap: 30px;
+}
+
+.mat-form-field {
+	width: 100%;
+	min-width: 700px;
+}
+
+mat-toolbar {
+	display: flex;
+	justify-content: flex-end;
+}
+
+mat-card-title,
+mat-card-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.error {
+	color: red;
+}
+
+.buttons {
+	* {
+		margin-right: 20px;
+	}
+
+	.label {
+		display: flex;
+  		align-items: center;
+		margin-bottom: 0;
+	}
+
+	display: flex;
+	justify-content: flex-end;
+}
+
+::ng-deep.mat-list-item-content {
+	justify-content: space-between;
+}

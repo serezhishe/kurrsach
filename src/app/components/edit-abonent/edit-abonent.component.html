@@ -1,0 +1,140 @@
+<h1 mat-dialog-title>Edit abonent tariffs</h1>
+<div class="form">
+	<form [formGroup]="form" (ngSubmit)="submit()">
+		<p>
+			<input
+				type="text"
+				placeholder="Choose smartphone tariff"
+				aria-label="Number"
+				matInput
+				formControlName="smartphone_tariff"
+				[matAutocomplete]="smartphone"
+			/>
+			<mat-autocomplete
+				#smartphone="matAutocomplete"
+				(optionSelected)="onSmartphoneSelected($event)"
+			>
+				<mat-option
+					*ngFor="let option of filteredSmartphoneTariffs$ | async"
+					[value]="option.smartphone_tariff_name"
+					[tariffId]="option.smartphone_tariff_id"
+				>
+					{{ option?.smartphone_tariff_name }}
+				</mat-option>
+				<mat-option
+					value=""
+					[tariffId]="null"
+				>
+					None
+				</mat-option>
+			</mat-autocomplete>
+		</p>
+		<p>
+			<input
+				type="text"
+				placeholder="Choose internet tariff"
+				aria-label="Number"
+				matInput
+				formControlName="internet_tariff"
+				[matAutocomplete]="internet"
+			/>
+			<mat-autocomplete
+				#internet="matAutocomplete"
+				(optionSelected)="onInternetSelected($event)"
+			>
+				<mat-option
+					*ngFor="let option of filteredInternetTariffs$ | async"
+					[value]="option.internet_tariff_name"
+					[tariffId]="option.internet_tariff_id"
+				>
+					{{ option?.internet_tariff_name }}
+				</mat-option>
+				<mat-option
+					value=""
+					[tariffId]="null"
+				>
+					None
+				</mat-option>
+			</mat-autocomplete>
+		</p>
+		<p>
+			<input
+				type="text"
+				placeholder="Choose TV tariff"
+				aria-label="Number"
+				matInput
+				formControlName="tv_tariff"
+				[matAutocomplete]="tv"
+			/>
+			<mat-autocomplete
+				#tv="matAutocomplete"
+				(optionSelected)="onTvSelected($event)"
+			>
+				<mat-option
+					*ngFor="let option of filteredTvTariffs$ | async"
+					[value]="option.tv_tariff_name"
+					[tariffId]="option.tv_tariff_id"
+				>
+					{{ option?.tv_tariff_name }}
+				</mat-option>
+				<mat-option
+					value=""
+					[tariffId]="null"
+				>
+					None
+				</mat-option>
+			</mat-autocomplete>
+		</p>
+		<p>
+			<input
+				type="text"
+				placeholder="Choose Package"
+				aria-label="Number"
+				matInput
+				formControlName="package_id"
+				[matAutocomplete]="packages"
+			/>
+			<mat-autocomplete
+				#packages="matAutocomplete"
+				(optionSelected)="onPackageSelected($event)"
+			>
+				<mat-option
+					*ngFor="let package of filteredPackages$ | async"
+					[value]="package.package_name"
+					[packageId]="package.package_id"
+				>
+					{{ package?.package_name }}
+				</mat-option>
+				<mat-option
+					value=""
+					[packageId]="null"
+				>
+					None
+				</mat-option>
+			</mat-autocomplete>
+		</p>
+		<div class="buttons">
+			<button
+				mat-raised-button
+				color="accent"
+				(click)="onCancel()"
+				[disabled]="disabled"
+			>
+				Cancel
+			</button>
+			<button
+				type="submit"
+				mat-raised-button
+				[disabled]="
+					(!smartphoneTariffId &&
+					!internetTariffId &&
+					!tvTariffId &&
+					!packageId) || disabled
+				"
+				color="primary"
+			>
+				Submit
+			</button>
+		</div>
+	</form>
+</div>

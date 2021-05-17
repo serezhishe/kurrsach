@@ -1,0 +1,123 @@
+<mat-toolbar>
+	<button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+	<button mat-raised-button color="accent" (click)="jsonInput.click()">Import data</button>
+	<input hidden (change)="onJSONFileSelected()" #jsonInput type="file" accept="application/json" id="json">
+</mat-toolbar>
+<div class="form">
+	<mat-card>
+		<mat-card-title>Add new internet tariff</mat-card-title>
+		<mat-card-content>
+			<form [formGroup]="form" (ngSubmit)="submit()">
+				<p>
+					<mat-form-field>
+						<input
+							type="text"
+							matInput
+							placeholder="Tariff Name"
+							formControlName="internet_tariff_name"
+					/></mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<input
+							type="number"
+							matInput
+							placeholder="Month Pay"
+							formControlName="month_pay"
+					/></mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<input
+							type="number"
+							matInput
+							placeholder="Included Gb Cost"
+							formControlName="included_home_gb_cost"
+					/></mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<input
+							type="number"
+							matInput
+							placeholder="Over GB Cost"
+							formControlName="over_home_gb_cost"
+					/></mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<input
+							type="number"
+							matInput
+							placeholder="Included GB Count"
+							formControlName="included_home_gb_count"
+					/></mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<input
+							type="number"
+							matInput
+							placeholder="Max speed"
+							formControlName="max_speed"
+					/></mat-form-field>
+				</p>
+				<p>
+					<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+					<input hidden (change)="onFileSelected()" #fileInput type="file" accept="image/jpeg" id="file">
+					<mat-error *ngIf="error" class="error">
+						{{ error }}
+					</mat-error>
+				</p>
+
+				<p class="description">
+					<mat-form-field style="width: 300px">
+						<textarea
+							matInput
+							rows="5"
+							cols="40"
+							placeholder="Description"
+							formControlName="description"
+						></textarea>
+					</mat-form-field>
+					<mat-error
+						*ngIf="
+							form.controls.description.errors &&
+							form.controls.description.errors.minlength
+						"
+					>
+						Description should contain at least 50 symbols
+					</mat-error>
+					<mat-error
+						*ngIf="
+							form.controls.description.errors &&
+							form.controls.description.errors.maxlength
+						"
+					>
+						Description cannot contain more than 1500 symbols
+					</mat-error>
+				</p>
+				<div class="preview">
+					Preview:
+					<h2>
+						{{ form.controls.internet_tariff_name.value }}
+					</h2>
+					<img id="image" width="600px" height="400px"/>
+					<div [innerHtml]="descriptionPreview$ | async"></div>
+				</div>
+
+
+				<div class="buttons">
+					<button
+						type="submit"
+						mat-raised-button
+						[disabled]="!form.valid"
+						color="primary"
+					>
+						Submit
+					</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
